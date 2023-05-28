@@ -16,7 +16,7 @@
 
 ---------------  S U M M A R Y ------------
 
-Command Line: -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:38859 -javaagent:/home/ahmed/eclipse/jee-2020-03/eclipse/configuration/org.eclipse.osgi/405/0/.cp/lib/javaagent-shaded.jar -Dfile.encoding=UTF-8 com.ahmedeid.sport.demo.DemoApplication
+Command Line: -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:38859 -javaagent:/home/ahmed/eclipse/jee-2020-03/eclipse/configuration/org.eclipse.osgi/405/0/.cp/lib/javaagent-shaded.jar -Dfile.encoding=UTF-8 com.ahmedeid.securityandjwt.demo.DemoApplication
 
 Host: AMD A4-5300B APU with Radeon(tm) HD Graphics, 2 cores, 5G, Ubuntu 20.04 LTS
 Time: Wed Jun 24 21:07:58 2020 EET elapsed time: 18241 seconds (0d 5h 4m 1s)

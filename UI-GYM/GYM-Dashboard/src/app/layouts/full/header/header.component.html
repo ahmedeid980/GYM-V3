@@ -9,14 +9,34 @@
   <!-- Notification Dropdown -->
   <!-- --------------------------------------------------------------- -->
 
-  <button mat-icon-button aria-label="Notifications">
+  <button mat-icon-button aria-label="Notifications" [matMenuTriggerFor]="notificationMenu" >
     <i-tabler
       class="d-flex"
       name="bell"
-      matBadge="12"
+      matBadge="{{unsubscription?.length}}"
       matBadgeColor="primary"
     ></i-tabler>
   </button>
+
+  <mat-menu #notificationMenu="matMenu" class="topbar-dd cardWithShadow notification-info" >
+    <button mat-menu-item>
+      <div class="note" *ngIf="unsubscription?.length > 0">
+        <div class="menu-item" *ngFor="let player of unsubscription">
+          <img
+          src="/assets/images/profile/profile.png"
+          class="rounded-circle object-cover profile-img"
+          width="35"/>
+          <div class="player-data">
+            <small>{{player?.playerName}}</small>
+          </div>
+        </div>
+      </div>
+      <div class="no-data-found" *ngIf="unsubscription?.length <= 0">
+        <small>No Data Found</small>
+      </div>
+    </button>
+    
+  </mat-menu>
 
   <span class="flex-1-auto"></span>
 
@@ -31,40 +51,20 @@
   >
       
       <img
-      src="/assets/images/profile/user-1.jpg"
+      src="/assets/images/profile/profile.png"
       class="rounded-circle object-cover profile-img"
-      width="35"
-    />
-  </button><h5>Bakr El-sherbiniy</h5>
-  <button mat-icon-button aria-label="Button" (click)="logout()">
-    <i-tabler
-      class="d-flex"
-      name="logout"
-    ></i-tabler>
-  </button>
+      width="35"/>
+  </button><h5>{{user?.userName}}</h5>
+  
   <mat-menu #profilemenu="matMenu" class="topbar-dd cardWithShadow">
     <button mat-menu-item>
       <mat-icon class="d-flex align-items-center"
         ><i-tabler name="user" class="icon-18 d-flex"></i-tabler></mat-icon
-      >My Profile
+      >My Profile My Profile My Profile My Profile
     </button>
-    <button mat-menu-item>
-      <mat-icon class="d-flex align-items-center"
-        ><i-tabler name="mail" class="icon-18 d-flex"></i-tabler></mat-icon
-      >My Account
-    </button>
-    <button mat-menu-item>
-      <mat-icon class="d-flex align-items-center"
-        ><i-tabler
-          name="list-check"
-          class="icon-18 d-flex"
-        ></i-tabler></mat-icon
-      >My Task
-    </button>
-
     <div class="p-x-12 m-t-12">
       <a
-        [routerLink]="['/authentication/login']"
+        (click)="logout()"
         mat-stroked-button
         color="primary"
         class="w-100"

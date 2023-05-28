@@ -10,57 +10,50 @@ export const navItems: NavItem[] = [
     route: '/dashboard',
   },
   {
-    navCap: 'Ui Components',
+    navCap: 'Information',
   },
   {
-    displayName: 'Badge',
-    iconName: 'rosette',
+    displayName: 'Player Information',
+    iconName: 'run',
     route: '/ui-components/badge',
   },
   {
-    displayName: 'Chips',
-    iconName: 'poker-chip',
-    route: '/ui-components/chips',
+    navCap: 'Settings',
   },
   {
-    displayName: 'Lists',
-    iconName: 'list',
-    route: '/ui-components/lists',
+    displayName: 'Users',
+    iconName: 'user',
+    route: '/settings',
   },
   {
-    displayName: 'Menu',
-    iconName: 'layout-navbar-expand',
-    route: '/ui-components/menu',
+    displayName: 'Players',
+    iconName: 'barbell',
+    route: '/settings',
   },
-  {
-    displayName: 'Tooltips',
-    iconName: 'tooltip',
-    route: '/ui-components/tooltips',
-  },
-  {
-    navCap: 'Auth',
-  },
-  {
-    displayName: 'Login',
-    iconName: 'lock',
-    route: '/authentication/login',
-  },
-  {
-    displayName: 'Register',
-    iconName: 'user-plus',
-    route: '/authentication/register',
-  },
-  {
-    navCap: 'Extra',
-  },
-  {
-    displayName: 'Icons',
-    iconName: 'mood-smile',
-    route: '/extra/icons',
-  },
-  {
-    displayName: 'Sample Page',
-    iconName: 'aperture',
-    route: '/extra/sample-page',
-  },
+  // {
+  //   navCap: 'Auth',
+  // },
+  // {
+  //   displayName: 'Login',
+  //   iconName: 'lock',
+  //   route: '/authentication/login',
+  // },
+  // {
+  //   displayName: 'Register',
+  //   iconName: 'user-plus',
+  //   route: '/authentication/register',
+  // },
+  // {
+  //   navCap: 'Extra',
+  // },
+  // {
+  //   displayName: 'Icons',
+  //   iconName: 'mood-smile',
+  //   route: '/extra/icons',
+  // },
+  // {
+  //   displayName: 'Sample Page',
+  //   iconName: 'aperture',
+  //   route: '/extra/sample-page',
+  // },
 ];

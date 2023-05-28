@@ -56,7 +56,7 @@ export class IntegrationService {
   }
 
   // register admin user
-  reigsterUserAdmin(user: any, token: String) {
+  registerUserAdmin(user: any, token: String) {
     const headerDict = {
       'Authorization': 'bearer '+token
     }
