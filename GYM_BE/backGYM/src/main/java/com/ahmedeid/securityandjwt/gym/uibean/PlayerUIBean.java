@@ -228,4 +228,31 @@ public class PlayerUIBean {
 		this.hulfMonthNo = hulfMonthNo;
 	}
 
+	@Override
+	public String toString() {
+		return "PlayerUIBean{" +
+				"id=" + id +
+				", code=" + code +
+				", playerName='" + playerName + '\'' +
+				", email='" + email + '\'' +
+				", address='" + address + '\'' +
+				", passportNumber='" + passportNumber + '\'' +
+				", cardNumber='" + cardNumber + '\'' +
+				", phone='" + phone + '\'' +
+				", modifiedBy=" + modifiedBy +
+				", playerImage='" + playerImage + '\'' +
+				", playerChampionships='" + playerChampionships + '\'' +
+				", amountPaid=" + amountPaid +
+				", subscriptionNo=" + subscriptionNo +
+				", dateModify=" + dateModify +
+				", sysSubtype=" + sysSubtype +
+				", sysExerciseType=" + sysExerciseType +
+				", sysGender=" + sysGender +
+				", height=" + height +
+				", weight=" + weight +
+				", age=" + age +
+				", amountRest=" + amountRest +
+				", hulfMonthNo=" + hulfMonthNo +
+				'}';
+	}
 }

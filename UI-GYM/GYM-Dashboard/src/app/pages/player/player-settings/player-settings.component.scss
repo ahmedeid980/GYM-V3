@@ -1,0 +1,104 @@
+.button-element {
+    display: flex;
+}
+::ng-deep {
+    .ant-modal-header {
+        background-color: #5d87ff;
+        .ng-star-inserted {
+            color: white;
+        }
+    }
+
+    .ant-modal-content {
+        // background-color: rgb(40, 99, 187);
+    }
+
+    .ant-modal-footer {
+        // background-color: rgb(40, 99, 187);
+    }
+    
+}
+
+#star {
+    margin-left: -5px;
+    vertical-align: bottom;
+    opacity: 0.5;
+}
+
+
+.more {
+    opacity: 0.5;
+}
+
+.btn:hover {
+    color: black;
+}
+
+.vl {
+    margin: 8px;
+    width: 2px;
+    border-right: 1px solid #aaaaaa;
+    height: 25px;
+}
+
+
+#plus {
+    opacity: 0.8;
+}
+
+.player-card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    margin-top: 40px !important;
+    height: 50vh !important;
+    overflow: auto !important;
+    .card {
+        border-radius: 10px;
+        border: 1px solid #aaaaaa;
+        padding: 1.5em;
+        width: 20em;
+        background-color: #e6e6e6;
+        box-shadow: 0.1em 0.1em 1em 0.2em #c5c5c5;
+    }
+}
+
+
+a:hover {
+    background-color: #ccc;
+}
+
+
+
+.btn-outlined:active {
+    color: #FFF;
+    border-color: #fff;
+}
+
+
+img {
+
+    cursor: pointer;
+    overflow: visible;
+}
+
+.btn:focus,
+.btn:active {
+    outline: none;
+    box-shadow: none;
+}
+
+.container{
+margin-top:100px;
+}
+
+.title-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .button-filter {
+        display: flex;
+        gap: 1em;
+    }
+}

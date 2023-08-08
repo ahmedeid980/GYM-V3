@@ -1,10 +1,93 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { 
-    height: 100%; 
+html,
+body {
+  height: 100%;
 }
 
-body { 
-    margin: 0; 
-    font-family: Roboto, "Helvetica Neue", sans-serif; 
+$input_border_color: #2d3d5f;
+$input_border_color_hover: #8f949e;
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  input.input-zorro {
+    border: 1px solid $input_border_color;
+    border-radius: 5px;
+  }
+
+  .input-zorro,
+  textarea.textarea-zorro {
+    border: 1px solid $input_border_color;
+    border-radius: 5px;
+  }
+
+  input.input-zorro:hover,
+  textarea.textarea-zorro:hover {
+    border-color: $input_border_color_hover;
+  }
+  .collect {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .input-in {
+    flex: 1 0 250px;
+  }
+  label {
+    font-weight: bolder;
+  }
+
+  nz-select {
+    width: 200px;
+  }
+
+  button.button-save {
+    border-radius: 15px;
+    margin-top: 10px;
+    width: 20%;
+  }
+
+  @media screen and (max-width: 1000px) {
+    button.button-save {
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 766px) {
+    button.button-save {
+      width: 20%;
+    }
+  }
+
+  @media screen and (max-width: 570px) {
+    button.button-save {
+      width: 100%;
+    }
+  }
+  
+  // remove input type number arrows
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+  }
+}
+
+// pages title
+.topic-title {
+  font-weight: bolder;
+}
+
+svg[data-icon="close"] {
+  border: 1px solid #707070;
+  border-radius: 50%;
+  background-color: #9f9f9f;
+  padding: 2px;
+  color: white;
 }

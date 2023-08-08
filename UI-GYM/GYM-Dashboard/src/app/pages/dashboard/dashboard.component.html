@@ -1,11 +1,16 @@
 <div class="row">
 
   <div class="col-lg-12">
+    
     <mat-card class="cardWithShadow">
       <mat-card-content class="p-24">
-        <mat-card-title>Top Projects</mat-card-title>
-        <div class="table-responsive m-t-16">
-          <table mat-table [dataSource]="playerList" class="w-100">
+        <mat-card-title>All Players In The System</mat-card-title>
+        <div class="table-responsive m-t-16 collect">
+          <div class="input-in mb-3 col">
+            <label for="search">Search</label>
+            <input nz-input placeholder="Search" class="input-zorro" id="search" (keyup)="applyFilter($event)" />
+        </div>
+          <table mat-table [dataSource]="playerListInfoForTable" class="w-100">
             <!-- Position Column -->
             <ng-container matColumnDef="player">
               <th
@@ -80,6 +85,9 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
           </table>
+          <mat-paginator [pageSizeOptions]="[5, 20, 50]"
+                     showFirstLastButtons >
+              </mat-paginator>
         </div>
       </mat-card-content>
     </mat-card>

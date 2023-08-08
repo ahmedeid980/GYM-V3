@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Gender } from '../interfaces/classification';
 
 @Injectable({
   providedIn: 'root'
@@ -78,7 +79,7 @@ export class IntegrationService {
   }
 
   // get gender lookup
-  getGenderLookup(token: String) {
+  getGenderLookup(token: String):Observable<Gender[]> {
     const headerDict = {
       'Authorization': 'bearer '+token
     }
@@ -86,17 +87,7 @@ export class IntegrationService {
     const requestOptions = {
       headers: new HttpHeaders(headerDict),
     };
-    return this.http.get(this.URLIntegration+'getGenderLookup', requestOptions).pipe(
-      catchError(error => {
-        let errorMsg: string = '';
-        if (error.error instanceof ErrorEvent) {
-          errorMsg = `Error: ${error.error.message}`;
-        } else {
-          errorMsg = this.getServerErrorMessage(error);
-        }
-        return errorMsg;
-      })
-    );
+    return this.http.get<Gender[]>(this.URLIntegration+'getGenderLookup', requestOptions)
   }
 
   // get subType lookup

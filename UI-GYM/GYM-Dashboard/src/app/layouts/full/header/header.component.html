@@ -8,7 +8,6 @@
   <!-- --------------------------------------------------------------- -->
   <!-- Notification Dropdown -->
   <!-- --------------------------------------------------------------- -->
-
   <button mat-icon-button aria-label="Notifications" [matMenuTriggerFor]="notificationMenu" >
     <i-tabler
       class="d-flex"
@@ -18,23 +17,42 @@
     ></i-tabler>
   </button>
 
-  <mat-menu #notificationMenu="matMenu" class="topbar-dd cardWithShadow notification-info" >
-    <button mat-menu-item>
-      <div class="note" *ngIf="unsubscription?.length > 0">
-        <div class="menu-item" *ngFor="let player of unsubscription">
+  <mat-menu #notificationMenu="matMenu" class="topbar-dd cardWithShadow notification-info " >
+    <div class="head">
+      <span nz-icon nzType="aliwangwang" nzTheme="outline" class="head__note-icon"></span>
+    <h3 class="head__note-title" >Unsubscripers</h3>
+    <small style="margin: 0 15px;">
+      you will find here unsubscriper players</small>
+    </div>
+      <div class="input-in mb-3 col">
+        <label for="search">Search</label>
+        <input nz-input placeholder="Search" class="input-zorro" id="search" (click)="$event.stopPropagation();" (keyup)="applyFilter($event)" />
+      </div>    
+    
+    <div class="note" *ngIf="unsubscription?.length > 0">
+    <button mat-menu-item class="sub-note-info" *ngFor="let player of unsubscription" (click)="getPlayer(player)">
+      
+        <div class="menu-item" >
           <img
           src="/assets/images/profile/profile.png"
           class="rounded-circle object-cover profile-img"
           width="35"/>
           <div class="player-data">
             <small>{{player?.playerName}}</small>
+            <div class="aid">
+              <span nz-icon nzType="delete" nzTheme="outline" (click)="deletePlayer(player)"
+              class="aid__delete-player"></span>
+              <span nz-icon nzType="reload" nzTheme="outline" 
+              class="aid__subscription"></span>
+            </div>
           </div>
         </div>
-      </div>
+      
       <div class="no-data-found" *ngIf="unsubscription?.length <= 0">
         <small>No Data Found</small>
       </div>
     </button>
+  </div>
     
   </mat-menu>
 
@@ -44,7 +62,7 @@
   <!-- profile Dropdown -->
   <!-- --------------------------------------------------------------- -->
   
-  <button
+  <button style="padding: 0;"
     mat-icon-button
     [matMenuTriggerFor]="profilemenu"
     aria-label="Notifications"
@@ -57,11 +75,13 @@
   </button><h5>{{user?.userName}}</h5>
   
   <mat-menu #profilemenu="matMenu" class="topbar-dd cardWithShadow">
-    <button mat-menu-item>
+    <button mat-menu-item (click)="adminProfile()">
       <mat-icon class="d-flex align-items-center"
         ><i-tabler name="user" class="icon-18 d-flex"></i-tabler></mat-icon
-      >My Profile My Profile My Profile My Profile
+      >My Profile - 
+      <a >{{user?.userName}}</a>
     </button>
+    
     <div class="p-x-12 m-t-12">
       <a
         (click)="logout()"

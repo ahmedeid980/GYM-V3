@@ -1,3 +1,4 @@
+import { ROUTE_PAGES } from 'src/app/services/services/security/store-storage';
 import { NavItem } from './nav-item/nav-item';
 
 export const navItems: NavItem[] = [
@@ -13,9 +14,14 @@ export const navItems: NavItem[] = [
     navCap: 'Information',
   },
   {
-    displayName: 'Player Information',
+    displayName: 'User Profile',
+    iconName: 'users',
+    // route: `/${ROUTE_PAGES.GYM_NAME}/player-setting`,
+  },
+  {
+    displayName: 'Player Profile',
     iconName: 'run',
-    route: '/ui-components/badge',
+    route: `/${ROUTE_PAGES.GYM_NAME}/player-setting`,
   },
   {
     navCap: 'Settings',
@@ -28,32 +34,6 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Players',
     iconName: 'barbell',
-    route: '/settings',
-  },
-  // {
-  //   navCap: 'Auth',
-  // },
-  // {
-  //   displayName: 'Login',
-  //   iconName: 'lock',
-  //   route: '/authentication/login',
-  // },
-  // {
-  //   displayName: 'Register',
-  //   iconName: 'user-plus',
-  //   route: '/authentication/register',
-  // },
-  // {
-  //   navCap: 'Extra',
-  // },
-  // {
-  //   displayName: 'Icons',
-  //   iconName: 'mood-smile',
-  //   route: '/extra/icons',
-  // },
-  // {
-  //   displayName: 'Sample Page',
-  //   iconName: 'aperture',
-  //   route: '/extra/sample-page',
-  // },
+    route: `/settings/${ROUTE_PAGES.GYM_NAME}/player-setting`,
+  }
 ];

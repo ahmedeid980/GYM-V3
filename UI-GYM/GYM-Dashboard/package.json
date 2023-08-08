@@ -25,6 +25,7 @@
     "apexcharts": "^3.35.3",
     "crypto-js": "^4.1.1",
     "ng-apexcharts": "1.7.1",
+    "ng-zorro-antd": "^15.1.0",
     "rxjs": "~7.5.0",
     "sass": "^1.57.1",
     "tslib": "^2.3.0",

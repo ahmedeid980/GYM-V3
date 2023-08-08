@@ -23,6 +23,17 @@ import { SidebarComponent } from './layouts/full/sidebar/sidebar.component';
 import { HeaderComponent } from './layouts/full/header/header.component';
 import { BrandingComponent } from './layouts/full/sidebar/branding.component';
 import { AppNavItemComponent } from './layouts/full/sidebar/nav-item/nav-item.component';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+import {MatTableModule} from '@angular/material/table';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+
+import {MatPaginatorModule} from '@angular/material/paginator';
+
+registerLocaleData(en);
 
 @NgModule({
   declarations: [
@@ -43,8 +54,13 @@ import { AppNavItemComponent } from './layouts/full/sidebar/nav-item/nav-item.co
     ReactiveFormsModule,
     MaterialModule,
     TablerIconsModule.pick(TablerIcons),
+    MatTableModule, NzBadgeModule, NzMessageModule, NzIconModule,
+    NzModalModule, MatPaginatorModule
   ],
   exports: [TablerIconsModule],
   bootstrap: [AppComponent],
+  providers: [
+    
+  ],
 })
 export class AppModule {}

@@ -11,12 +11,14 @@ import * as TablerIcons from 'angular-tabler-icons/icons';
 import { UiComponentsRoutes } from './ui-components.routing';
 
 // ui components
-import { AppBadgeComponent } from './badge/badge.component';
-import { AppChipsComponent } from './chips/chips.component';
-import { AppListsComponent } from './lists/lists.component';
-import { AppMenuComponent } from './menu/menu.component';
-import { AppTooltipsComponent } from './tooltips/tooltips.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import { PlayerSettingComponent } from '../player/player-settings/player-settings.component';
+
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 @NgModule({
   imports: [
@@ -26,14 +28,10 @@ import { MatNativeDateModule } from '@angular/material/core';
     FormsModule,
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
-    MatNativeDateModule,
+    MatNativeDateModule, NzButtonModule, NzInputModule, NzIconModule,
+    NzSelectModule, NzModalModule
   ],
-  declarations: [
-    AppBadgeComponent,
-    AppChipsComponent,
-    AppListsComponent,
-    AppMenuComponent,
-    AppTooltipsComponent,
+  declarations: [PlayerSettingComponent
   ],
 })
 export class UicomponentsModule {}

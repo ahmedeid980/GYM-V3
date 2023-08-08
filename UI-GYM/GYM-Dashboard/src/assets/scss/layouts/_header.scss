@@ -22,3 +22,48 @@ html .topbar {
     align-items: center !important;
   }
 }
+.head {
+  width: 100%; 
+  text-align: center;
+  margin-bottom: 1em;
+  &__note-icon {
+    color: rgb(238, 79, 79);
+    font-size: 1.7em;
+  }
+
+  &__note-title {
+    padding: 0 10px; 
+    margin: 0;
+    font-weight: bolder;
+    font-size: 1.5em;
+  }
+}
+
+button.sub-note-info {
+  padding: 1em;
+}
+
+.aid {
+  display: flex;
+  gap: .3em;
+  &__delete-player {
+    background-color: rgb(211, 71, 71);
+    color: white;
+    padding: 0.3em;
+    border-radius: .3em;
+    cursor: default;
+  }
+
+  &__subscription {
+    background-color: rgb(71, 115, 211);
+    color: white;
+    padding: 0.3em;
+    border-radius: .3em;
+    cursor: default;
+  }
+}
+
+.note {
+  max-height: 15em;
+  overflow: auto;
+}

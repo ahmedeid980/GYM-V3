@@ -1,0 +1,224 @@
+<div class="title-content">
+    <h1 class="topic-title">Player Information</h1>
+    <div class="example-button-container button-filter">
+        <button mat-mini-fab color="primary" (click)="showModal()">
+            <mat-icon>open_in_new</mat-icon>
+        </button>
+        <button mat-mini-fab color="primary" (click)="refresh()">
+            <mat-icon>refresh</mat-icon>
+        </button>
+  </div>
+</div>
+<small style="margin-left: 2%;">You can -> 
+    <span nz-icon nzType="plus-circle" style="color: rgb(71, 158, 71);" nzTheme="outline"></span> Save or Update - 
+    <span nz-icon nzType="fund-view" style="color: rgb(44, 56, 167);" nzTheme="outline"></span> View - 
+    <span nz-icon nzType="delete" style="color: rgb(235, 69, 69);" nzTheme="outline"></span> delete
+</small> 
+<br><br>
+
+<div>
+    <form [formGroup]="formGroup" id="player-form" class="collect">
+        <div class="input-in mb-3 col">
+            <label for="name">Subscriper Name</label>
+            <input nz-input placeholder="Subscriper Name" class="input-zorro" id="name" required
+            formControlName="playerName"/>
+        </div>
+        <div class="input-in mb-3 col">
+            <label for="address">Subscriper Address</label>
+            <input nz-input placeholder="User Address" class="input-zorro" id="address" required
+            formControlName="address"/>
+        </div>
+        <div class="input-in mb-3 col">
+            <label for="champion">Subscriper Champion</label>
+            <textarea class="textarea-zorro" formControlName="playerChampionships"
+            nz-input id="champion"
+            placeholder="Enter Subscriper champions"
+            [nzAutosize]="{ minRows: 2, maxRows: 6 }"
+          ></textarea>
+        </div>
+        <div class="input-in mb-3 col">
+            <label for="passport">Passport Number</label>
+            <input nz-input placeholder="Passport Number" class="input-zorro" id="passport" type="number"
+            formControlName="passportNumber"/>
+        </div>
+        <div class="input-in mb-3 col">
+            <label for="s-id">Subscriper ID</label>
+            <input nz-input placeholder="User Name" class="input-zorro" id="s-id" type="number"
+            formControlName="cardNumber"/>
+        </div>
+        <div class="input-in mb-3 col">
+            <label for="m-number">Subscriper Mobile Number</label>
+            <input nz-input placeholder="Subscriper Mobile Number" class="input-zorro" id="m-number" formControlName="phone"/>
+        </div>
+        <div class="input-in mb-3 col">
+            <label for="sub-type">Subscriper Type</label>
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select Subscriper Type" 
+            formControlName="sysSubtype"
+            class="input-zorro input-in mb-3 col" id="sub-type">
+                <nz-option nzCustomContent nzLabel="{{sType?.subtypeName}}" 
+                nzValue="{{sType?.id}}" 
+                id="gender" *ngFor="let sType of subTypeList" >
+                    {{sType?.subtypeName}}
+                </nz-option>
+                
+              </nz-select>
+        </div>
+        <div class="input-in mb-3 col">
+            <label for="exercise">Exercise Type</label>
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select Exercise Type" 
+            formControlName="sysExerciseType"
+            class="input-zorro input-in mb-3 col" 
+            id="exercise">
+                <nz-option nzCustomContent nzLabel="{{exerciseType?.exerciseTypeName}}" 
+                nzValue="{{exerciseType?.id}}" 
+                id="gender" *ngFor="let exerciseType of exerciseTypeList" >
+                    {{exerciseType?.exerciseTypeName}}
+                </nz-option>
+                
+              </nz-select>
+        </div>
+        <div class="input-in mb-3 col">
+            <label for="gender">Gender</label>
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select Gender"
+            formControlName="sysGender"
+            class="input-zorro input-in mb-3 col" id="gender">
+                <nz-option nzCustomContent nzLabel="{{gender?.gender}}" 
+                nzValue='{{gender?.id}}'
+                id="gender" *ngFor="let gender of genderList" >
+                    {{gender?.gender}}
+                </nz-option>
+                
+              </nz-select>
+        </div>
+        <div class="input-in mb-3 col">
+            <label for="tall">Subscriper Tall</label>
+            <input nz-input placeholder="Subscriper Tall" class="input-zorro" id="tall" type="number"
+            formControlName="height"/>
+        </div>
+        <div class="input-in mb-3 col">
+            <label for="pweight">Subscriper Weight</label>
+            <input nz-input placeholder="Subscriper Weight" class="input-zorro" id="pweight" type="number"
+            formControlName="weight"/>
+        </div>
+        <div class="input-in mb-3 col">
+            <label for="page">Subscriper Age</label>
+            <input nz-input placeholder="Subscriper Age" class="input-zorro" id="page" type="number"
+            formControlName="age"/>
+        </div>
+        <div class="input-in mb-3 col">
+            <label for="Paid">Amount Paid</label>
+            <input nz-input placeholder="Amount Paid" class="input-zorro" id="Paid" type="number"
+            formControlName="amountPaid"/>
+        </div>
+        <div class="input-in mb-3 col">
+            <label for="rest">Remaining Amount</label>
+            <input nz-input placeholder="Remaining Amount" type="number"
+            class="input-zorro" id="rest" formControlName="amountRest"/>
+        </div>
+    </form>
+    
+</div>
+
+<div class="col button-element">
+    <button nz-button nzType="primary"
+    class="button-save" *ngIf="!isUpdate"
+    (click)="addNewPlayer()" [nzLoading]="isLoadingTwo">
+        <span nz-icon nzType="plus-circle"></span>
+        Save
+      </button>
+
+      <button nz-button nzType="primary"
+    class="button-save" *ngIf="isUpdate"
+    (click)="updatePlayer()" [nzLoading]="isLoadingTwo">
+        <span nz-icon nzType="edit"></span>
+        Update
+      </button>
+
+</div>
+
+
+<nz-modal
+        [(nzVisible)]="isVisible"
+        nzTitle="Players Details"
+        nzCancelText="Cancel"
+        (nzOnOk)="handleOk()"
+        (nzOnCancel)="handleCancel()"
+        nzWidth="70"
+        [nzStyle]="{ top: '20px' }"
+      >
+        <ng-container *nzModalContent>
+            <div class="input-in" style="width: 15em;">
+                <label for="search">Search</label>
+                <input nz-input placeholder="Subscriper Weight" class="input-zorro" id="search" />
+            </div>
+
+    <!-- player details popup content -->
+            
+    <div class="container player-card">
+
+        <div class="card mt-2 border-5 pt-1 active pb-0 px-3" *ngFor="let player of PlayerList" (click)="getPlayer(player)">
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-12 ">
+                        <h4 class="card-title "><b>{{ player.playerName }}</b></h4>
+
+                    </div>
+                    <div class="col">
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            <p class="card-text text-muted small ">
+                                <img src="https://img.icons8.com/metro/26/000000/star.png" class="mr-1 " width="19"
+                                    height="19" id="star"> <span class="vl mr-2 ml-0"></span>
+
+                                Created by <span class="font-weight-bold"> BBBootstrap Team</span> on 1 Nov , 2018</p>
+                        </h6>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card-footer bg-white px-0 ">
+                <div class="row">
+
+                    <div class=" col-md-auto ">
+                        <a href="#" class="btn btn-outlined btn-black text-muted bg-transparent"
+                            data-wow-delay="0.7s"><img src="https://img.icons8.com/ios/50/000000/settings.png"
+                                width="19" height="19"> <small>SETTINGS</small></a>
+
+                        <i class="mdi mdi-settings-outline"></i>
+
+
+
+
+                        <a href="#" class="
+                         btn-outlined btn-black text-muted"><img src="https://img.icons8.com/metro/26/000000/link.png"
+                                width="17" height="17" id="plus">
+                            <small>PROGRAM LINK</small> </a>
+
+
+                        <a href="#" class="btn btn-outlined btn-black text-muted "><img
+                                src="https://img.icons8.com/metro/26/000000/more.png" width="20" height="20"
+                                class="mr-2 more"><small>MORE</small></a>
+                        <span class="vl ml-3"></span>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </ng-container>
+      </nz-modal>

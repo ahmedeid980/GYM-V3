@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
+import { ROUTE_PAGES } from './services/services/security/store-storage';
 import { NotFoundPageComponent } from './pages/not-found/not-found-page/not-found-page.component';
 
 const routes: Routes = [
@@ -11,7 +12,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/authentication/login',
+        redirectTo: '/dashboard',
         pathMatch: 'full',
       },
       {
@@ -20,17 +21,19 @@ const routes: Routes = [
           import('./pages/pages.module').then((m) => m.PagesModule),
       },
       {
-        path: 'ui-components',
+        path: ROUTE_PAGES.GYM_NAME,
         loadChildren: () =>
           import('./pages/ui-components/ui-components.module').then(
             (m) => m.UicomponentsModule
           ),
       },
       {
-        path: 'extra',
+        path: `settings/${ROUTE_PAGES.GYM_NAME}`,
         loadChildren: () =>
-          import('./pages/extra/extra.module').then((m) => m.ExtraModule),
-      },
+          import('./pages/ui-components/ui-components.module').then(
+            (m) => m.UicomponentsModule
+          ),
+      }
     ],
   },
   {
@@ -54,6 +57,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

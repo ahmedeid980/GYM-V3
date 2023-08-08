@@ -1,4 +1,6 @@
 import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import {
   ApexChart,
   ChartComponent,
@@ -113,6 +115,7 @@ const ELEMENT_DATA: productsData[] = [
 })
 export class AppDashboardComponent {
   @ViewChild('chart') chart: ChartComponent = Object.create(null);
+  @ViewChild(MatPaginator) paginator?: MatPaginator;
 
   public salesOverviewChart!: Partial<salesOverviewChart> | any;
   public yearlyChart!: Partial<yearlyChart> | any;
@@ -124,6 +127,7 @@ export class AppDashboardComponent {
   user: any;
   token: string;
   playerList: any;
+  playerListInfoForTable: any;
 
   constructor(private storeService: StoreDataService, private integration: IntegrationService) {
     this.user = storeService.getStoreElement(STORAGE_ELEMENT.USER);
@@ -135,6 +139,13 @@ export class AppDashboardComponent {
   getPlayers(token: string) {
     this.integration.getPlayerListOfInSuscription(token).subscribe(data => {
       this.playerList = data;
+      this.playerListInfoForTable = new MatTableDataSource(this.playerList);
+        this.playerListInfoForTable.paginator = this.paginator;
     })
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.playerListInfoForTable.filter = filterValue.trim().toLowerCase();
   }
 }
