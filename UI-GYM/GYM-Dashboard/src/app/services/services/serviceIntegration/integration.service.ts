@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Gender } from '../interfaces/classification';
+import { Gender, Player } from '../interfaces/classification';
 
 @Injectable({
   providedIn: 'root'
@@ -180,7 +180,7 @@ export class IntegrationService {
   }
 
   // get player by code ...
-  getPlayerByCode(code: any, token: String) {
+  getPlayerByCode(code: any, token: String): Observable<Player> {
     const headerDict = {
       'Authorization': 'bearer '+token
     }
@@ -188,17 +188,21 @@ export class IntegrationService {
     const requestOptions = {
       headers: new HttpHeaders(headerDict),
     };
-    return this.http.get(this.URLIntegration+'getPlayerByCode/'+code, requestOptions).pipe(
-      catchError(error => {
-        let errorMsg: string = '';
-        if (error.error instanceof ErrorEvent) {
-          errorMsg = `Error: ${error.error.message}`;
-        } else {
-          errorMsg = this.getServerErrorMessage(error);
-        }
-        return errorMsg;
-      })
-    );
+    return this.http.get<Player>(this.URLIntegration+'getPlayerByCode/'+code, requestOptions);
+  }
+
+  // change-player-subscriptions-strategy/{subtypeId}/{codeId}
+  changePlayerSubscriptionStrategy(subtypeId: any, code: any, token: String): Observable<Player> {
+    const headerDict = {
+      'Authorization': 'bearer '+token
+    }
+    
+    const requestOptions = {
+      headers: new HttpHeaders(headerDict),
+    };
+    return this.http.get<Player>
+    (this.URLIntegration+'changePlayerSubscriptionsStrategy/'
+    +subtypeId+'/'+code, requestOptions);
   }
 
   // change player image ...
@@ -238,6 +242,51 @@ export class IntegrationService {
     };
 
     return this.http.put(this.URLIntegration+'updatePlayer/'+ code ,player ,requestOptions).pipe(
+      catchError(error => {
+        let errorMsg: string = '';
+        if (error.error instanceof ErrorEvent) {
+          errorMsg = `Error: ${error.error.message}`;
+        } else {
+          errorMsg = this.getServerErrorMessage(error);
+        }
+        return errorMsg;
+      })
+    );
+  }
+
+  // register admin user
+  reigsterUserAdmin(user: any, token: String) {
+    const headerDict = {
+      'Authorization': 'bearer '+token
+    }
+
+    const requestOptions = {
+      headers: new HttpHeaders(headerDict),
+    };
+    return this.http.post(this.URLIntegration+'registerUserAdmin', user, requestOptions).pipe(
+      catchError(error => {
+        let errorMsg: string = '';
+        if (error.error instanceof ErrorEvent) {
+          errorMsg = `Error: ${error.error.message}`;
+        } else {
+          errorMsg = this.getServerErrorMessage(error);
+        }
+        return errorMsg;
+      })
+    );
+  }
+
+  // save new player ...
+  getDate(token: String) {
+    const headerDict = {
+      'Authorization': 'bearer '+token
+    }
+
+    const requestOptions = {
+      headers: new HttpHeaders(headerDict),
+    };
+
+    return this.http.get(this.URLIntegration+'date' ,requestOptions).pipe(
       catchError(error => {
         let errorMsg: string = '';
         if (error.error instanceof ErrorEvent) {
@@ -318,7 +367,7 @@ export class IntegrationService {
   }
 
   // check Password Validation ...
-  getPlayerListOfInSuscription(token: String) {
+  getPlayerListOfInSuscription(token: String): Observable<Player[]> {
     const headerDict = {
       'Authorization': 'bearer '+token
     }
@@ -327,21 +376,11 @@ export class IntegrationService {
       headers: new HttpHeaders(headerDict),
     };
 
-    return this.http.post(`${this.URLIntegration}getplayerListOfInSubscriptionOrOut/1`, null, requestOptions).pipe(
-      catchError(error => {
-        let errorMsg: string = '';
-        if (error.error instanceof ErrorEvent) {
-          errorMsg = `Error: ${error.error.message}`;
-        } else {
-          errorMsg = this.getServerErrorMessage(error);
-        }
-        return errorMsg;
-      })
-    );
+    return this.http.post<Player[]>(`${this.URLIntegration}getplayerListOfInSubscriptionOrOut/1`, null, requestOptions);
   }
 
   // check Password Validation ...
-  getPlayerListOfOutSuscription(token: String) {
+  getPlayerListOfOutSuscription(token: String): Observable<Player[]>{
     const headerDict = {
       'Authorization': 'bearer '+token
     }
@@ -350,17 +389,7 @@ export class IntegrationService {
       headers: new HttpHeaders(headerDict),
     };
 
-    return this.http.post(`${this.URLIntegration}getplayerListOfInSubscriptionOrOut/2`, null, requestOptions).pipe(
-      catchError(error => {
-        let errorMsg: string = '';
-        if (error.error instanceof ErrorEvent) {
-          errorMsg = `Error: ${error.error.message}`;
-        } else {
-          errorMsg = this.getServerErrorMessage(error);
-        }
-        return errorMsg;
-      })
-    );
+    return this.http.post<Player[]>(`${this.URLIntegration}getplayerListOfInSubscriptionOrOut/2`, null, requestOptions);
   }
 
   // update Player amount rest By Code ...

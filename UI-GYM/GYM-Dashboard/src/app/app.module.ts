@@ -32,7 +32,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 
 import {MatPaginatorModule} from '@angular/material/paginator';
-
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzStepsModule } from 'ng-zorro-antd/steps';
+import { SearchModule } from './pipe/search.module';
 registerLocaleData(en);
 
 @NgModule({
@@ -43,7 +45,8 @@ registerLocaleData(en);
     SidebarComponent,
     HeaderComponent,
     BrandingComponent,
-    AppNavItemComponent,
+    AppNavItemComponent, 
+  
   ],
   imports: [
     BrowserModule,
@@ -52,12 +55,12 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule,
+    MaterialModule, SearchModule,
     TablerIconsModule.pick(TablerIcons),
     MatTableModule, NzBadgeModule, NzMessageModule, NzIconModule,
-    NzModalModule, MatPaginatorModule
+    NzModalModule, MatPaginatorModule, NzEmptyModule, NzStepsModule,
   ],
-  exports: [TablerIconsModule],
+  exports: [TablerIconsModule,],
   bootstrap: [AppComponent],
   providers: [
     

@@ -14,14 +14,9 @@ export const navItems: NavItem[] = [
     navCap: 'Information',
   },
   {
-    displayName: 'User Profile',
-    iconName: 'users',
-    // route: `/${ROUTE_PAGES.GYM_NAME}/player-setting`,
-  },
-  {
     displayName: 'Player Profile',
     iconName: 'run',
-    route: `/${ROUTE_PAGES.GYM_NAME}/player-setting`,
+    route: `/${ROUTE_PAGES.GYM_NAME}/player-profile`,
   },
   {
     navCap: 'Settings',
@@ -29,11 +24,16 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Users',
     iconName: 'user',
-    route: '/settings',
+    route: `/settings/${ROUTE_PAGES.GYM_NAME}/user-setting`,
   },
   {
     displayName: 'Players',
     iconName: 'barbell',
     route: `/settings/${ROUTE_PAGES.GYM_NAME}/player-setting`,
+  },
+  {
+    displayName: 'Player Resubscription',
+    iconName: 'stack-pop',
+    route: `/settings/${ROUTE_PAGES.GYM_NAME}/resubscription-setting`,
   }
 ];

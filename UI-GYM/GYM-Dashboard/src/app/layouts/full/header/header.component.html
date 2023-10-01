@@ -26,11 +26,12 @@
     </div>
       <div class="input-in mb-3 col">
         <label for="search">Search</label>
-        <input nz-input placeholder="Search" class="input-zorro" id="search" (click)="$event.stopPropagation();" (keyup)="applyFilter($event)" />
+        <input nz-input placeholder="Search" class="input-zorro" id="search" 
+        (click)="$event.stopPropagation();" [(ngModel)]="query" />
       </div>    
     
     <div class="note" *ngIf="unsubscription?.length > 0">
-    <button mat-menu-item class="sub-note-info" *ngFor="let player of unsubscription" (click)="getPlayer(player)">
+    <button mat-menu-item class="sub-note-info" *ngFor='let player of unsubscription | search:"playerName,code":query' (click)="getPlayer(player)">
       
         <div class="menu-item" >
           <img
@@ -42,7 +43,7 @@
             <div class="aid">
               <span nz-icon nzType="delete" nzTheme="outline" (click)="deletePlayer(player)"
               class="aid__delete-player"></span>
-              <span nz-icon nzType="reload" nzTheme="outline" 
+              <span nz-icon nzType="reload" nzTheme="outline" (click)="playerToResubscription(player)"
               class="aid__subscription"></span>
             </div>
           </div>
@@ -75,10 +76,10 @@
   </button><h5>{{user?.userName}}</h5>
   
   <mat-menu #profilemenu="matMenu" class="topbar-dd cardWithShadow">
-    <button mat-menu-item (click)="adminProfile()">
+    <button mat-menu-item>
       <mat-icon class="d-flex align-items-center"
         ><i-tabler name="user" class="icon-18 d-flex"></i-tabler></mat-icon
-      >My Profile - 
+      >
       <a >{{user?.userName}}</a>
     </button>
     

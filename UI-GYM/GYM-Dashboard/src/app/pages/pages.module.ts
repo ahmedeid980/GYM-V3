@@ -9,13 +9,15 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 import { AppDashboardComponent } from './dashboard/dashboard.component';
+import { NzStepsModule } from 'ng-zorro-antd/steps';
+import { SearchPipe } from '../pipe/search.pipe';
 
 @NgModule({
-  declarations: [AppDashboardComponent],
+  declarations: [AppDashboardComponent,],
   imports: [
     CommonModule,
     MaterialModule,
-    FormsModule,
+    FormsModule, NzStepsModule, 
     NgApexchartsModule,
     RouterModule.forChild(PagesRoutes),
     TablerIconsModule.pick(TablerIcons),

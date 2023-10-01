@@ -1,0 +1,44 @@
+.example-action-buttons {
+  padding-bottom: 20px;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+}
+
+.resub {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  
+  &__player {
+    font-size: 1.2em;
+    font-weight: bolder;
+  }
+
+  .btn-gap {
+    display: flex;
+    flex-direction: column;
+    gap: .1em;
+
+    button.with-gap {
+      background-color: rgb(27, 111, 126);
+      border-color: rgb(27, 111, 126);
+
+      &:hover {
+        background-color: rgb(65, 127, 138);
+      }
+    }
+  }
+}
+
+// mat-form-field div.mat-mdc-form-field-subscript-wrapper, div.mdc-text-field--no-label {
+//   width: 20em !important;
+// }

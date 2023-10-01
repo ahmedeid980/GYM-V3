@@ -65,8 +65,11 @@ public class UserService implements UserDetailsService {
 	}
 
 	// delete user ...
-	public void deleteUser(int id) {
+	public boolean deleteUser(int id) {
+		boolean status = false;
 		userRepository.deleteById(id);
+		status = true;
+		return status;
 	}
 	
 	// check old password ...

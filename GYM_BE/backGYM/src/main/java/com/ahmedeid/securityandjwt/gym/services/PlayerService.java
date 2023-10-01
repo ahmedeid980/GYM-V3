@@ -6,13 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ahmedeid.securityandjwt.gym.entities.Player;
+import com.ahmedeid.securityandjwt.gym.entities.SysSubtype;
 import com.ahmedeid.securityandjwt.gym.repository.PlayerRepository;
+import com.ahmedeid.securityandjwt.gym.repository.SysSubTypeRepository;
 
 @Service
 public class PlayerService {
 
 	@Autowired
 	private PlayerRepository playerRepository;
+
+	@Autowired
+	private SysSubTypeRepository sysSubTypeRepository;
 
 	// get all players of list ...
 	public List<Player> getAll() {
@@ -49,5 +54,16 @@ public class PlayerService {
 		}
 		return false;
 	}
-	
+
+    public Player changePlayerSubscriptionsStrategy(long subtypeId, long codeId) {
+
+		Player player = this.playerRepository.getPlayerByCode(codeId);
+		if (player != null) {
+			SysSubtype subtype = this.sysSubTypeRepository.findById((int) subtypeId).orElse(null);
+
+			player.setSysSubtype(subtype);
+			return playerRepository.save(player);
+		}
+		return null;
+    }
 }

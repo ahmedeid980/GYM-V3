@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { AdminIntegrationService } from 'src/app/services/services/adminServiceIntegration/admin-integration.service';
 import {
   Gender,
@@ -11,13 +11,14 @@ import { MessageService } from 'src/app/services/services/message/message.servic
 import { STORAGE_ELEMENT } from 'src/app/services/services/security/store-storage';
 import { IntegrationService } from 'src/app/services/services/serviceIntegration/integration.service';
 import { StoreDataService } from 'src/app/services/services/storage/store-data.service';
+import { UserService } from 'src/app/services/services/user/user.service';
 
 @Component({
   selector: 'app-player-settings',
   templateUrl: './player-settings.component.html',
   styleUrls: ['./player-settings.component.scss'],
 })
-export class PlayerSettingComponent {
+export class PlayerSettingComponent implements OnDestroy {
   user: any;
   token: string;
   genderList: Gender[];
@@ -25,6 +26,8 @@ export class PlayerSettingComponent {
   exerciseTypeList: any;
   isVisible = false;
   isUpdate = false;
+  confirmModal?: NzModalRef;
+  query: any; // for filter of player  //// search 
 
   // form Group of players
   formGroup = new FormGroup({
@@ -60,7 +63,8 @@ export class PlayerSettingComponent {
     private integration: IntegrationService,
     private adminIntegration: AdminIntegrationService,
     private message: MessageService,
-    private modalService: NzModalService
+    private userService: UserService,
+    private modal: NzModalService
   ) {
     this.user = storeService.getStoreElement(STORAGE_ELEMENT.USER);
     this.token = storeService.getElementWthoutSecret(STORAGE_ELEMENT.TOKEN);
@@ -68,6 +72,20 @@ export class PlayerSettingComponent {
     this.getGenderList(this.token);
     this.getExerciseList(this.token);
     this.getSubtypeList(this.token);
+
+    this.info = this.userService.playerUpdateAsObservable.subscribe((player: any) => {
+      if (player) {
+        this.integration.getPlayerByCode(player?.code, this.token).subscribe(data => {
+          this.getPlayer(data);
+        })
+      }
+    })
+  }
+
+  info;
+  ngOnDestroy(): void {
+    this.info.unsubscribe();
+    this.userService.changePlayerUpdate(null);
   }
 
   getGenderList(token: string) {
@@ -151,6 +169,7 @@ export class PlayerSettingComponent {
     this.adminIntegration
       .getPlayersList(this.token)
       .subscribe((players: any) => {
+        console.log(players);
         if (players.length) this.PlayerList = players;
       });
   }
@@ -205,9 +224,33 @@ export class PlayerSettingComponent {
     }
   }
 
+  deletePlayer(player: Player) {
+    this.confirmModal = this.modal.confirm({
+      nzTitle: `Do you Want to delete Player <b>${player.playerName}</b> ?
+      <span style='font-size:100px;'>&#128547;</span>
+      `,
+      // nzContent: 'When clicked the OK button, this dialog will be closed after 1 second',
+      nzOnOk: () =>
+        new Promise((resolve, reject) => {
+          setTimeout(Math.random() > 0.1 ? resolve : reject, 1);
+          
+          this.adminIntegration.deletePlayerById(player.id, this.token).subscribe(data => {
+            if(data) {
+              this.message.createSuccessMessage(`Player ${player.playerName} deleted successfully`);
+              this.getAllPlayers();
+      
+            } else this.message.createErrorMessage(`Player ${player.playerName} not deleted`);
+          });
+
+        }).catch(() => this.message.createErrorMessage('Oops something went wrong'))
+    });
+    
+  }
+
   refresh(): void {
     this.formGroup.reset();
     this.isUpdate = false;
+    this.isLoadingTwo = false;
   }
 
 }

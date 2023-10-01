@@ -104,8 +104,8 @@ public class AdminServiceIntegration {
 
 	// delete user admin ...
 	@DeleteMapping(value = "/deleteUserAdmin/{id}")
-	public void deleteUserAdmin(@PathVariable int id) {
-		this.userService.deleteUser(id);
+	public boolean deleteUserAdmin(@PathVariable int id) {
+		return this.userService.deleteUser(id);
 	}
 
 	@PutMapping(value = "updateUserPassword/{id}")

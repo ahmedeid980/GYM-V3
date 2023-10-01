@@ -17,6 +17,7 @@ import { Player } from 'src/app/services/services/interfaces/classification';
 import { AdminIntegrationService } from 'src/app/services/services/adminServiceIntegration/admin-integration.service';
 import { MessageService } from 'src/app/services/services/message/message.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { UserService } from 'src/app/services/services/user/user.service';
 
 
 @Component({
@@ -36,10 +37,12 @@ export class HeaderComponent implements OnInit{
   token: String = "";
   unsubscription: any;
   confirmModal?: NzModalRef;
+  query: any; // for filter of player  //// search 
 
   constructor(public dialog: MatDialog, private route: Router, private storeService: StoreDataService,
     private integration: IntegrationService, private modal: NzModalService, private i18n: NzI18nService,
-    private adminIntegration: AdminIntegrationService, private message: MessageService) {
+    private adminIntegration: AdminIntegrationService, private message: MessageService,
+    private userService: UserService) {
     this.user = storeService.getStoreElement(STORAGE_ELEMENT.USER);
     this.token = storeService.getElementWthoutSecret(STORAGE_ELEMENT.TOKEN);
 
@@ -52,14 +55,14 @@ export class HeaderComponent implements OnInit{
 
   logout() {
     this.confirmModal = this.modal.confirm({
-      nzTitle: 'Do you Want to logout now?',
+      nzTitle: 'Do you want to logout now?',
       // nzContent: 'When clicked the OK button, this dialog will be closed after 1 second',
       nzOnOk: () =>
         new Promise((resolve, reject) => {
           setTimeout(Math.random() > 0.1 ? resolve : reject, 1);
           localStorage.clear();
           this.route.navigate(['/authentication/login']);
-        }).catch(() => console.log('Oops errors!'))
+        }).catch(() => this.message.createErrorMessage('Oops! Something went wrong'))
     });
     
   }
@@ -67,7 +70,10 @@ export class HeaderComponent implements OnInit{
   getUnsubscriptionPlayerList(token: String) {
     this.integration.getPlayerListOfOutSuscription(token).subscribe(data => {
       if(data)
-        this.unsubscription = data;
+        this.userService.changePlayerUnsubscriptionStatus(data);
+        this.userService.playerOfUnsubscription.subscribe((players: any) => {
+            this.unsubscription = players;
+        });
     })
   }
 
@@ -77,7 +83,7 @@ export class HeaderComponent implements OnInit{
 
   deletePlayer(player: Player) {
     this.confirmModal = this.modal.confirm({
-      nzTitle: `Do you Want to delete Player <b>${player.playerName}</b> ?
+      nzTitle: `Do you want to delete Player <b>${player.playerName}</b> ?
       <span style='font-size:100px;'>&#128547;</span>
       `,
       // nzContent: 'When clicked the OK button, this dialog will be closed after 1 second',
@@ -93,18 +99,14 @@ export class HeaderComponent implements OnInit{
             } else this.message.createErrorMessage(`Player ${player.playerName} not deleted`);
           });
 
-        }).catch(() => console.log('Oops errors!'))
+        }).catch(() => this.message.createErrorMessage('Oops something went wrong'))
     });
     
   }
 
-  adminProfile() {
-    console.log(this.user);
-    // navigate to admin profile.
+  playerToResubscription(player: Player) {
+    this.userService.changePlayerSubscription(player);
+    this.route.navigate(['/settings/center-gym/resubscription-setting'])
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.unsubscription.filter = filterValue.trim().toLowerCase();
-  }
 }

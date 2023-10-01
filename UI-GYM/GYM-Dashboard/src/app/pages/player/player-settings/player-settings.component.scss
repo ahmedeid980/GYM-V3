@@ -46,29 +46,9 @@
     opacity: 0.8;
 }
 
-.player-card {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2em;
-    margin-top: 40px !important;
-    height: 50vh !important;
-    overflow: auto !important;
-    .card {
-        border-radius: 10px;
-        border: 1px solid #aaaaaa;
-        padding: 1.5em;
-        width: 20em;
-        background-color: #e6e6e6;
-        box-shadow: 0.1em 0.1em 1em 0.2em #c5c5c5;
-    }
-}
-
-
 a:hover {
     background-color: #ccc;
 }
-
-
 
 .btn-outlined:active {
     color: #FFF;
@@ -88,17 +68,6 @@ img {
     box-shadow: none;
 }
 
-.container{
-margin-top:100px;
-}
-
-.title-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    .button-filter {
-        display: flex;
-        gap: 1em;
-    }
+.container__{
+margin-top: 50px;
 }

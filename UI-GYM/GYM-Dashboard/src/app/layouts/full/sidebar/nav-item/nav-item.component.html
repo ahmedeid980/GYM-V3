@@ -1,4 +1,4 @@
-<div mat-subheader *ngIf="item.navCap" class="nav-caption">
+<div mat-subheader *ngIf="item.navCap" class="nav-caption" style="font-weight: 500;">
   {{ item.navCap }}
 </div>
 <a 
@@ -12,10 +12,10 @@
   class="menu-list-item"
   *ngIf="!item.navCap"
 >
-  <i-tabler
+  <i-tabler style="color: #f35caa;"
     class="routeIcon"
     name="{{ item.iconName }}"
     matListItemIcon
   ></i-tabler>
-  <span class="hide-menu">{{ item.displayName }}</span>
+  <span class="hide-menu" style="font-weight: bolder;">{{ item.displayName }}</span>
 </a>

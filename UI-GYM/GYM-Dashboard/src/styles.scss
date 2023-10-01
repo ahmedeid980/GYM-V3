@@ -48,6 +48,12 @@ body {
     width: 20%;
   }
 
+  button.button-subscription {
+    border-radius: 15px;
+    margin-top: 10px;
+    width: 100%;
+  }
+
   @media screen and (max-width: 1000px) {
     button.button-save {
       width: 100%;
@@ -90,4 +96,60 @@ svg[data-icon="close"] {
   background-color: #9f9f9f;
   padding: 2px;
   color: white;
+}
+
+div.container .display-block-flex-wrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: .5em 0;
+}
+
+div.title-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  .button-filter {
+      display: flex;
+      gap: 1em;
+  }
+}
+
+div.cards {
+  &__content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2em;
+      height: 70vh;
+      overflow: auto;
+  }
+
+  &__info {
+      border: 1px solid rgb(219, 219, 219);
+      padding: 1em;
+      text-align: center;
+      border-radius: .4em;
+      width: 20em;
+      // box-shadow: rgba(79, 79, 126, 0.25) 0px 2px 5px -1px, rgba(68, 68, 68, 0.3) 0px 1px 3px -1px;
+
+      h4 {
+          font-weight: bolder;
+          font-size: 1em;
+          color: rgb(23, 76, 223);
+      }
+  }
+
+  &__info:hover {
+      cursor: pointer;
+      box-shadow: rgba(21, 21, 128, 0.25) 0px 2px 5px -1px, rgba(27, 27, 27, 0.3) 0px 1px 3px -1px;
+      h4 {
+          color: #5d87ff;
+      }
+  }
+}
+
+input.ng-invalid.ng-touched, nz-select.ng-invalid.ng-touched {
+  border-color: crimson;
 }

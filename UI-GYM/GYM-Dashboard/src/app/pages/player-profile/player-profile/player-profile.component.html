@@ -1,0 +1,105 @@
+<div class="title-content">
+    <h1 class="topic-title">Player Profile</h1>
+    <div class="example-button-container button-filter">
+        <button mat-mini-fab color="primary" *ngIf="player" (click)="playerToResubscription()"
+        title="resubscription">
+            <mat-icon>settings_backup_restore</mat-icon>
+        </button>
+        <button mat-mini-fab color="primary" *ngIf="player" title="update player"
+        (click)="playerToUpdate()">
+            <mat-icon>create</mat-icon>
+        </button>
+  </div>
+</div>
+
+<div class="players-subscribe-unsubscribe">
+  <div class="input-in  col">
+    <label for="sub-type">Subscription Players</label>
+    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select Subscription Player"
+    class="input-zorro input-in  col" id="sub-players" (ngModelChange)='termSelectChanged($event)' 
+    [ngModel]="selected">
+        <nz-option nzCustomContent nzLabel="{{subscribe?.playerName}}" 
+        nzValue="{{subscribe?.code}}"
+        id="sub__player" *ngFor="let subscribe of subscription" >
+            {{subscribe?.playerName}}
+        </nz-option>
+        
+      </nz-select>
+  </div>
+  <div class="input-in  col">
+    <label for="sub-type">Unsubscribe Players</label>
+    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select Unsubscribe Player"
+    class="input-zorro input-in  col" id="unsub-players" (ngModelChange)='termSelectChanged($event)' 
+    [ngModel]="selected">
+        <nz-option nzCustomContent nzLabel="{{unsubscribe?.playerName}}" 
+        nzValue="{{unsubscribe?.code}}" 
+        id="unsub__player" *ngFor="let unsubscribe of unsubscription" >
+            {{unsubscribe?.playerName}}
+        </nz-option>
+        
+      </nz-select>
+  </div>
+</div>
+
+<div *ngIf="player">
+    <div class="main main-raised" style="margin-top: 4em; text-align: center;">
+        <div class="profile-content">
+                <div class="container">
+                    <div class="row">
+                      <div class="col-md-6 ml-auto mr-auto">
+                         <div class="profile">
+                              <div class="name">
+                                  <div>
+                                    <h3 class="title">{{player.playerName}}</h3>
+                                    <!-- <i-tabler style="color: #f35caa;"
+                                    class="routeIcon"
+                                    name="brand-apple-arcade"
+                                    matListItemIcon
+                                  ></i-tabler> -->
+                                  </div>
+                    <h6><small class="info">Address: </small> {{player.address}}</h6>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="description text-center">
+                        <p> <small class="info">Tall: </small> {{ player.height }} 
+                          &nbsp;&nbsp;-&nbsp;&nbsp;<small class="info">Weight: </small>{{ player.weight }} </p>
+                        <p> <small class="info">Age: </small>{{ player.age }}
+                          &nbsp;&nbsp;-&nbsp;&nbsp;<small class="info">Phone: </small>{{ player.phone }} </p>
+                        <!-- <p> <small class="info">Age: </small>{{ player.age }} </p> -->
+                        <div class="title-header">
+                          
+                        </div>
+                    </div>
+            <div class="row">
+              <div class="col-md-6 ml-auto mr-auto mb-4">
+                            <div class="profile-tabs">
+                              <ul class="nav nav-pills nav-pills-icons justify-content-center" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" role="tab" data-toggle="tab">
+                                      <p class="info">{{numberOfDaysLeft}}</p>
+                                      Number Of Days Left
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#works" role="tab" data-toggle="tab">
+                                      <p class="info">{{player.sysSubtype?.subtypeName}}</p>
+                                        Subscription Type
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" href="#works" role="tab" data-toggle="tab">
+                                    <p class="info">{{player.subscriptionNo}}</p>
+                                      Subscription Times
+                                  </a>
+                              </li>
+                              </ul>
+                            </div>
+                </div>
+                </div>
+            
+                </div>
+            </div>
+      </div>
+</div>

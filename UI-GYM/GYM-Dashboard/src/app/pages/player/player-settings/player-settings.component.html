@@ -18,17 +18,17 @@
 
 <div>
     <form [formGroup]="formGroup" id="player-form" class="collect">
-        <div class="input-in mb-3 col">
+        <div class="input-in  col">
             <label for="name">Subscriper Name</label>
             <input nz-input placeholder="Subscriper Name" class="input-zorro" id="name" required
             formControlName="playerName"/>
         </div>
-        <div class="input-in mb-3 col">
+        <div class="input-in  col">
             <label for="address">Subscriper Address</label>
             <input nz-input placeholder="User Address" class="input-zorro" id="address" required
             formControlName="address"/>
         </div>
-        <div class="input-in mb-3 col">
+        <div class="input-in  col">
             <label for="champion">Subscriper Champion</label>
             <textarea class="textarea-zorro" formControlName="playerChampionships"
             nz-input id="champion"
@@ -36,25 +36,25 @@
             [nzAutosize]="{ minRows: 2, maxRows: 6 }"
           ></textarea>
         </div>
-        <div class="input-in mb-3 col">
+        <div class="input-in  col">
             <label for="passport">Passport Number</label>
             <input nz-input placeholder="Passport Number" class="input-zorro" id="passport" type="number"
             formControlName="passportNumber"/>
         </div>
-        <div class="input-in mb-3 col">
+        <div class="input-in  col">
             <label for="s-id">Subscriper ID</label>
             <input nz-input placeholder="User Name" class="input-zorro" id="s-id" type="number"
             formControlName="cardNumber"/>
         </div>
-        <div class="input-in mb-3 col">
+        <div class="input-in  col">
             <label for="m-number">Subscriper Mobile Number</label>
             <input nz-input placeholder="Subscriper Mobile Number" class="input-zorro" id="m-number" formControlName="phone"/>
         </div>
-        <div class="input-in mb-3 col">
+        <div class="input-in  col">
             <label for="sub-type">Subscriper Type</label>
             <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select Subscriper Type" 
             formControlName="sysSubtype"
-            class="input-zorro input-in mb-3 col" id="sub-type">
+            class="input-zorro input-in  col" id="sub-type">
                 <nz-option nzCustomContent nzLabel="{{sType?.subtypeName}}" 
                 nzValue="{{sType?.id}}" 
                 id="gender" *ngFor="let sType of subTypeList" >
@@ -63,11 +63,11 @@
                 
               </nz-select>
         </div>
-        <div class="input-in mb-3 col">
+        <div class="input-in  col">
             <label for="exercise">Exercise Type</label>
             <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select Exercise Type" 
             formControlName="sysExerciseType"
-            class="input-zorro input-in mb-3 col" 
+            class="input-zorro input-in  col" 
             id="exercise">
                 <nz-option nzCustomContent nzLabel="{{exerciseType?.exerciseTypeName}}" 
                 nzValue="{{exerciseType?.id}}" 
@@ -77,11 +77,11 @@
                 
               </nz-select>
         </div>
-        <div class="input-in mb-3 col">
+        <div class="input-in  col">
             <label for="gender">Gender</label>
             <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select Gender"
             formControlName="sysGender"
-            class="input-zorro input-in mb-3 col" id="gender">
+            class="input-zorro input-in  col" id="gender">
                 <nz-option nzCustomContent nzLabel="{{gender?.gender}}" 
                 nzValue='{{gender?.id}}'
                 id="gender" *ngFor="let gender of genderList" >
@@ -90,27 +90,27 @@
                 
               </nz-select>
         </div>
-        <div class="input-in mb-3 col">
+        <div class="input-in  col">
             <label for="tall">Subscriper Tall</label>
             <input nz-input placeholder="Subscriper Tall" class="input-zorro" id="tall" type="number"
             formControlName="height"/>
         </div>
-        <div class="input-in mb-3 col">
+        <div class="input-in  col">
             <label for="pweight">Subscriper Weight</label>
             <input nz-input placeholder="Subscriper Weight" class="input-zorro" id="pweight" type="number"
             formControlName="weight"/>
         </div>
-        <div class="input-in mb-3 col">
+        <div class="input-in  col">
             <label for="page">Subscriper Age</label>
             <input nz-input placeholder="Subscriper Age" class="input-zorro" id="page" type="number"
             formControlName="age"/>
         </div>
-        <div class="input-in mb-3 col">
+        <div class="input-in  col">
             <label for="Paid">Amount Paid</label>
             <input nz-input placeholder="Amount Paid" class="input-zorro" id="Paid" type="number"
             formControlName="amountPaid"/>
         </div>
-        <div class="input-in mb-3 col">
+        <div class="input-in  col">
             <label for="rest">Remaining Amount</label>
             <input nz-input placeholder="Remaining Amount" type="number"
             class="input-zorro" id="rest" formControlName="amountRest"/>
@@ -144,81 +144,36 @@
         (nzOnOk)="handleOk()"
         (nzOnCancel)="handleCancel()"
         nzWidth="70"
+        nzHeight="100vh"
         [nzStyle]="{ top: '20px' }"
       >
         <ng-container *nzModalContent>
             <div class="input-in" style="width: 15em;">
                 <label for="search">Search</label>
-                <input nz-input placeholder="Subscriper Weight" class="input-zorro" id="search" />
+                <input nz-input placeholder="Subscriper Weight" class="input-zorro" id="search" [(ngModel)]="query" />
             </div>
 
+            <!--  -->
     <!-- player details popup content -->
-            
-    <div class="container player-card">
-
-        <div class="card mt-2 border-5 pt-1 active pb-0 px-3" *ngFor="let player of PlayerList" (click)="getPlayer(player)">
-            <div class="card-body ">
-                <div class="row">
-                    <div class="col-12 ">
-                        <h4 class="card-title "><b>{{ player.playerName }}</b></h4>
-
-                    </div>
-                    <div class="col">
-                        <h6 class="card-subtitle mb-2 text-muted">
-                            <p class="card-text text-muted small ">
-                                <img src="https://img.icons8.com/metro/26/000000/star.png" class="mr-1 " width="19"
-                                    height="19" id="star"> <span class="vl mr-2 ml-0"></span>
-
-                                Created by <span class="font-weight-bold"> BBBootstrap Team</span> on 1 Nov , 2018</p>
-                        </h6>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="card-footer bg-white px-0 ">
-                <div class="row">
-
-                    <div class=" col-md-auto ">
-                        <a href="#" class="btn btn-outlined btn-black text-muted bg-transparent"
-                            data-wow-delay="0.7s"><img src="https://img.icons8.com/ios/50/000000/settings.png"
-                                width="19" height="19"> <small>SETTINGS</small></a>
-
-                        <i class="mdi mdi-settings-outline"></i>
-
-
-
-
-                        <a href="#" class="
-                         btn-outlined btn-black text-muted"><img src="https://img.icons8.com/metro/26/000000/link.png"
-                                width="17" height="17" id="plus">
-                            <small>PROGRAM LINK</small> </a>
-
-
-                        <a href="#" class="btn btn-outlined btn-black text-muted "><img
-                                src="https://img.icons8.com/metro/26/000000/more.png" width="20" height="20"
-                                class="mr-2 more"><small>MORE</small></a>
-                        <span class="vl ml-3"></span>
-                    </div>
-
-                    
+    <!-- *ngFor="let player of PlayerList" (click)="getPlayer(player)" -->
+    <div class="container__ player-card">
+        <div class="empty" *ngIf="!PlayerList?.length">
+            <nz-empty></nz-empty>
+        </div>
+        <div class="cards">
+            <div class="cards__content">
+                <div class="cards__info" *ngFor='let player of PlayerList | search:"playerName,code":query'>
+                    <h4>{{ player?.playerName }}</h4>
+                    <p><small> <small style="color: rgb(155, 59, 15);">{{player?.address}}</small> 
+                        | {{ player?.dateModify | date: 'dd/MM/yyyy HH:mm' }}</small></p>
+                    <p><small>{{player?.sysSubtype?.subtypeName}}</small></p>
+                    <button nz-button nzType="primary" (click)="getPlayer(player)">Update</button> &nbsp;
+                    <button nz-button nzType="primary" (click)="deletePlayer(player)" nzDanger>Delete</button>
                 </div>
             </div>
         </div>
-        
+
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
         </ng-container>
       </nz-modal>

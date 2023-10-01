@@ -1,0 +1,154 @@
+<div class="title-content">
+  <h1 class="topic-title">Player Resubscription</h1>
+  <div class="example-button-container button-filter">
+      <button mat-mini-fab color="primary" (click)="showModal()">
+          <mat-icon>open_in_new</mat-icon>
+      </button>
+</div>
+</div>
+
+<mat-accordion class="example-headers-align" multi >
+  <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" style="margin-top: 3em;">
+    <mat-expansion-panel-header>
+      <mat-panel-title style="font-weight: bolder; color: rgb(49, 49, 207);">
+        Resubscription For Player
+      </mat-panel-title>
+      <mat-panel-description>
+        You can resubscripe your player subscription
+        <mat-icon style="color: crimson;">subscriptions</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <form [formGroup]="formGroup" class="resub">
+      <div class="resub__">
+        <p class="resub__player" *ngIf="getPlayerInfoStatus"> {{player?.playerName}} - 
+          {{player?.dateModify | date: 'dd/MM/yyyy HH:mm'}} </p>
+
+        <p class="resub__player" *ngIf="player?.sysSubtype.id != 2 &&   getPlayerInfoStatus">{{numberOfDaysLeft > 0 ? numberOfDaysLeft + ' days': numberOfDaysLeft + ' days left'}}</p>
+        <p class="resub__player" *ngIf="player?.sysSubtype.id == 2 &&   getPlayerInfoStatus">
+          {{ player?.sysSubtype?.subtypeName}}
+        </p>
+        <mat-form-field>
+          <div class="input-in">
+            <label for="name">Amount Paid</label>
+            <input nz-input placeholder="Amount Paid" type="number" 
+            class="input-zorro" id="amountPaid" required
+            formControlName="amountPaid"/>
+        </div>
+          <input [hidden]="true" matInput>
+        </mat-form-field>
+    
+        <mat-form-field>
+          <div class="input-in">
+            <label for="name">Amount Rest</label>
+            <input nz-input placeholder="Amount Rest" type="number" 
+            class="input-zorro" id="amountRest"
+            formControlName="amountRest"/>
+        </div>
+          <input matInput [hidden]="true" type="number" min="1">
+        </mat-form-field>
+      </div>
+
+      <div class="resub__btn btn-gap">
+        <button nz-button nzType="primary" class="button-subscription" 
+        (click)="resubscriptionPlayerSubscription()" >
+        <span nz-icon nzType="plus-circle"></span>
+        Resubscription
+      </button>
+
+      <button nz-button nzType="primary" class="button-subscription with-gap" 
+        (click)="resubscriptionPlayerWithGap()" >
+        <span nz-icon nzType="plus-circle"></span>
+        Resubscription with Gap
+      </button>
+      </div>
+    </form>
+
+  </mat-expansion-panel>
+  
+
+  <mat-expansion-panel *ngIf="subscriptionStatus">
+    <mat-expansion-panel-header>
+      <mat-panel-title style="font-weight: bolder; color: rgb(49, 49, 207);">
+        Change Strategy
+      </mat-panel-title>
+      <mat-panel-description>
+        You can change player subscription strategy
+        <mat-icon style="color: rgb(220, 20, 87);">assignment</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    
+      <form class="resub" [formGroup]="changeStrategy">
+        <mat-form-field style="width: 20em;">
+        <div class="resub__info">
+          <input matInput [hidden]="true" >
+        <div class="input-in mb-5" >
+          <label for="sub-type">Subscriper Type</label>
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select Subscriper Type" 
+          formControlName="strategy" required="true"
+          class="input-zorro input-in mb-3 col" id="sub-type">
+              <nz-option nzCustomContent nzLabel="{{sType?.subtypeName}}" 
+              nzValue="{{sType?.id}}" 
+              id="gender" *ngFor="let sType of subTypeList" >
+                  {{sType?.subtypeName}}
+              </nz-option>
+              
+            </nz-select>
+      </div>
+        </div>
+      </mat-form-field>
+        <div class="resub__btn">
+          <button nz-button nzType="primary" class="button-subscription" 
+          (click)="changePlayerSubscriptionStrategy()">
+          <span nz-icon nzType="plus-circle"></span>
+          Change
+        </button>
+        </div>
+      </form>
+      
+    
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-expansion-panel>
+</mat-accordion>
+
+
+<nz-modal
+        [(nzVisible)]="isVisible"
+        nzTitle="Players Details"
+        nzCancelText="Cancel"
+        (nzOnOk)="handleOk()"
+        (nzOnCancel)="handleCancel()"
+        nzWidth="70"
+        nzHeight="100vh"
+        [nzStyle]="{ top: '20px' }"
+      >
+        <ng-container *nzModalContent>
+            <div class="input-in" style="width: 15em;">
+                <label for="search">Search</label>
+                <input nz-input placeholder="Subscriper Weight" class="input-zorro" id="search" [(ngModel)]="query" />
+            </div>
+
+            <!--  -->
+    <!-- player details popup content -->
+    <!-- *ngFor="let player of PlayerList" (click)="getPlayer(player)" -->
+    <div class="container__ player-card" style="margin-top: 3em;">
+        <div class="empty" *ngIf="!PlayerList?.length">
+            <nz-empty></nz-empty>
+        </div>
+        <div class="cards">
+            <div class="cards__content">
+                <div class="cards__info" *ngFor='let player of PlayerList | search:"playerName,code":query' 
+                (click)="getToResubscription(player)">
+                    <h4>{{ player?.playerName }}</h4>
+                    <p><small> <small style="color: rgb(155, 59, 15);">{{player?.address}}</small> 
+                        | {{ player?.dateModify | date: 'dd/MM/yyyy HH:mm' }}</small></p>
+                    <p><small>{{player?.sysSubtype?.subtypeName}}</small></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+        </ng-container>
+      </nz-modal>

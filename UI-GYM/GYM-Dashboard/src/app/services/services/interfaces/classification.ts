@@ -10,11 +10,13 @@ export interface Player {
   phone: string;
   playerChampionships: string;
   playerName: string;
-  sysExerciseType: string;
-  sysGender: string;
-  sysSubtype: string;
+  sysExerciseType: any;
+  dateModify: Date;
+  sysGender: any;
+  sysSubtype: any;
   weight: number;
   code?: number;
+  subscriptionNo: number;
 }
 
 export interface Gender {
