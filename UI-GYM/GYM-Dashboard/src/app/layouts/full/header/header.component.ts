@@ -9,7 +9,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
-import { STORAGE_ELEMENT } from 'src/app/services/services/security/store-storage';
+import { ENV, STORAGE_ELEMENT } from 'src/app/services/services/security/store-storage';
 import { IntegrationService } from 'src/app/services/services/serviceIntegration/integration.service';
 import { StoreDataService } from 'src/app/services/services/storage/store-data.service';
 import { en_US, NzI18nService } from 'ng-zorro-antd/i18n';
@@ -38,6 +38,7 @@ export class HeaderComponent implements OnInit{
   unsubscription: any;
   confirmModal?: NzModalRef;
   query: any; // for filter of player  //// search 
+  HEADER_INFO_NAME = ENV.PROFILE_IMAGE;
 
   constructor(public dialog: MatDialog, private route: Router, private storeService: StoreDataService,
     private integration: IntegrationService, private modal: NzModalService, private i18n: NzI18nService,

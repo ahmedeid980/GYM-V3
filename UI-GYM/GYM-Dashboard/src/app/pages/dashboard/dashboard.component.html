@@ -4,7 +4,9 @@
     
     <mat-card class="cardWithShadow">
       <mat-card-content class="p-24">
-        <mat-card-title>All Players In The System</mat-card-title>
+        <div class="title-content">
+          <h1 class="topic-title">All Players In The System</h1>
+      </div>
         <div class="table-responsive m-t-16 collect">
           <div class="input-in mb-3 col">
             <label for="search">Search &nbsp;</label>
@@ -16,6 +18,7 @@
               <th
                 mat-header-cell
                 *matHeaderCellDef
+                style="color: rgb(18, 173, 140);"
                 class="f-w-600 mat-subtitle-1 f-s-14"
               >
                 Player
@@ -23,7 +26,7 @@
               <td mat-cell *matCellDef="let player">
                 <div class="d-flex align-items-center">
                   <img
-                    [src]="'../../../assets/images/profile/profile.png'"
+                    src="{{PROFILE_IMAGE_DASHBOARD}}"
                     alt="users"
                     width="40"
                     class="rounded-circle"
@@ -45,6 +48,7 @@
               <th
                 mat-header-cell
                 *matHeaderCellDef
+                style="color: rgb(18, 173, 140);"
                 class="f-w-600 mat-subtitle-1 f-s-14"
               >
               Phone
@@ -59,6 +63,7 @@
               <th
                 mat-header-cell
                 *matHeaderCellDef
+                style="color: rgb(18, 173, 140);"
                 class="f-w-600 mat-subtitle-1 f-s-14"
               >
               Exercise
@@ -73,6 +78,7 @@
               <th
                 mat-header-cell
                 *matHeaderCellDef
+                style="color: rgb(18, 173, 140);"
                 class="f-w-600 mat-subtitle-1 f-s-14"
               >
               Subscription date

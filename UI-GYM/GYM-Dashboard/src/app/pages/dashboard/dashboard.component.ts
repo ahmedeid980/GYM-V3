@@ -17,7 +17,7 @@ import {
   ApexMarkers,
   ApexResponsive,
 } from 'ng-apexcharts';
-import { STORAGE_ELEMENT } from 'src/app/services/services/security/store-storage';
+import { ENV, STORAGE_ELEMENT } from 'src/app/services/services/security/store-storage';
 import { IntegrationService } from 'src/app/services/services/serviceIntegration/integration.service';
 import { StoreDataService } from 'src/app/services/services/storage/store-data.service';
 
@@ -128,6 +128,7 @@ export class AppDashboardComponent {
   token: string;
   playerList: any;
   playerListInfoForTable: any;
+  PROFILE_IMAGE_DASHBOARD = ENV.PROFILE_IMAGE_DASHBOARD;
 
   constructor(private storeService: StoreDataService, private integration: IntegrationService) {
     this.user = storeService.getStoreElement(STORAGE_ELEMENT.USER);

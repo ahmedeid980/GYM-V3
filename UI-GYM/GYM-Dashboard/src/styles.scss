@@ -111,6 +111,7 @@ div.title-content {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+  color: #5d87ff;
   .button-filter {
       display: flex;
       gap: 1em;
@@ -152,4 +153,9 @@ div.cards {
 
 input.ng-invalid.ng-touched, nz-select.ng-invalid.ng-touched {
   border-color: crimson;
+}
+
+span[nz-icon] {
+  position: relative;
+  top: -3px;
 }

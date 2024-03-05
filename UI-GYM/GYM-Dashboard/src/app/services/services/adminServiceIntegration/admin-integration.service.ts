@@ -7,15 +7,13 @@ import {
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { ENV } from '../security/store-storage';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdminIntegrationService {
   constructor(private http: HttpClient, private router: Router) {}
-
-  URI = 'http://localhost:7172/adminServiceIntegration/'; //localhost:8080/demo-0.0.1-SNAPSHOT
-  // URI = 'http://localhost:8083/GYMWAR/adminServiceIntegration/'; //localhost:8080/demo-0.0.1-SNAPSHOT
 
   private getServerErrorMessage(error: HttpErrorResponse): string {
 
@@ -52,7 +50,7 @@ export class AdminIntegrationService {
       headers: new HttpHeaders(headerDict),
     };
 
-    return this.http.get(this.URI + 'getSysExerciseTypeList', requestOptions).pipe(
+    return this.http.get(ENV.URI_ADMIN + 'getSysExerciseTypeList', requestOptions).pipe(
       catchError(error => {
         let errorMsg: string = '';
         if (error.error instanceof ErrorEvent) {
@@ -75,7 +73,7 @@ export class AdminIntegrationService {
       headers: new HttpHeaders(headerDict),
     };
 
-    return this.http.get(this.URI + 'getUsersList', requestOptions).pipe(
+    return this.http.get(ENV.URI_ADMIN + 'getUsersList', requestOptions).pipe(
       catchError(error => {
         let errorMsg: string = '';
         if (error.error instanceof ErrorEvent) {
@@ -98,7 +96,7 @@ export class AdminIntegrationService {
       headers: new HttpHeaders(headerDict),
     };
 
-    return this.http.get(this.URI + 'getPlayersList', requestOptions).pipe(
+    return this.http.get(ENV.URI_ADMIN + 'getPlayersList', requestOptions).pipe(
       catchError(error => {
         let errorMsg: string = '';
         if (error.error instanceof ErrorEvent) {
@@ -121,7 +119,7 @@ export class AdminIntegrationService {
       headers: new HttpHeaders(headerDict),
     };
 
-    return this.http.delete(this.URI + 'deletePlayer/' + id, requestOptions).pipe(
+    return this.http.delete(ENV.URI_ADMIN + 'deletePlayer/' + id, requestOptions).pipe(
       catchError(error => {
         let errorMsg: string = '';
         if (error.error instanceof ErrorEvent) {
@@ -143,7 +141,7 @@ export class AdminIntegrationService {
     const requestOptions = {
       headers: new HttpHeaders(headerDict),
     };
-    return this.http.get(this.URI + 'getUserById/'+id, requestOptions).pipe(
+    return this.http.get(ENV.URI_ADMIN + 'getUserById/'+id, requestOptions).pipe(
       catchError(error => {
         let errorMsg: string = '';
         if (error.error instanceof ErrorEvent) {
@@ -165,7 +163,7 @@ export class AdminIntegrationService {
     const requestOptions = {
       headers: new HttpHeaders(headerDict),
     };
-    return this.http.put(this.URI + 'updateUserAdmin/'+id, userUI, requestOptions).pipe(
+    return this.http.put(ENV.URI_ADMIN + 'updateUserAdmin/'+id, userUI, requestOptions).pipe(
       catchError(error => {
         let errorMsg: string = '';
         if (error.error instanceof ErrorEvent) {
@@ -188,7 +186,7 @@ export class AdminIntegrationService {
       headers: new HttpHeaders(headerDict),
     };
 
-    return this.http.delete(this.URI + 'deleteUserAdmin/' + id, requestOptions).pipe(
+    return this.http.delete(ENV.URI_ADMIN + 'deleteUserAdmin/' + id, requestOptions).pipe(
       catchError(error => {
         let errorMsg: string = '';
         if (error.error instanceof ErrorEvent) {
@@ -209,7 +207,7 @@ export class AdminIntegrationService {
     const requestOptions = {
       headers: new HttpHeaders(headerDict),
     };
-    return this.http.put(this.URI + 'updateUserPassword/'+id, changePassword, requestOptions).pipe(
+    return this.http.put(ENV.URI_ADMIN + 'updateUserPassword/'+id, changePassword, requestOptions).pipe(
       catchError(error => {
         let errorMsg: string = '';
         if (error.error instanceof ErrorEvent) {

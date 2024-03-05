@@ -1,3 +1,4 @@
+import { ENV } from './../security/store-storage';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -11,11 +12,6 @@ import { Gender, Player } from '../interfaces/classification';
 export class IntegrationService {
 
   constructor(private http: HttpClient, private router: Router) { }
-
-  URI = 'http://localhost:7172/BackGYM/auth/'; //localhost:8080/demo-0.0.1-SNAPSHOT
-  URLIntegration = 'http://localhost:7172/serviceIntegration/';
-  // URI = 'http://localhost:8083/GYMWAR/BackGYM/auth/'; //localhost:8080/demo-0.0.1-SNAPSHOT
-  // URLIntegration = 'http://localhost:8083/GYMWAR/serviceIntegration/';
 
   private getServerErrorMessage(error: HttpErrorResponse): string {
 
@@ -43,7 +39,7 @@ export class IntegrationService {
 
 
   login(loginRequest: any) {
-    return this.http.post(this.URI+'login',loginRequest).pipe(
+    return this.http.post(ENV.URI+'login',loginRequest).pipe(
       catchError(error => {
         let errorMsg: string = '';
         if (error.error instanceof ErrorEvent) {
@@ -65,7 +61,7 @@ export class IntegrationService {
     const requestOptions = {
       headers: new HttpHeaders(headerDict),
     };
-    return this.http.post(this.URLIntegration+'registerUserAdmin', user, requestOptions).pipe(
+    return this.http.post(ENV.URLIntegration+'registerUserAdmin', user, requestOptions).pipe(
       catchError(error => {
         let errorMsg: string = '';
         if (error.error instanceof ErrorEvent) {
@@ -87,7 +83,7 @@ export class IntegrationService {
     const requestOptions = {
       headers: new HttpHeaders(headerDict),
     };
-    return this.http.get<Gender[]>(this.URLIntegration+'getGenderLookup', requestOptions)
+    return this.http.get<Gender[]>(ENV.URLIntegration+'getGenderLookup', requestOptions)
   }
 
   // get subType lookup
@@ -99,7 +95,7 @@ export class IntegrationService {
     const requestOptions = {
       headers: new HttpHeaders(headerDict),
     };
-    return this.http.get(this.URLIntegration+'getSubtypeLookup', requestOptions).pipe(
+    return this.http.get(ENV.URLIntegration+'getSubtypeLookup', requestOptions).pipe(
       catchError(error => {
         let errorMsg: string = '';
         if (error.error instanceof ErrorEvent) {
@@ -121,7 +117,7 @@ export class IntegrationService {
     const requestOptions = {
       headers: new HttpHeaders(headerDict),
     };
-    return this.http.get(this.URLIntegration+'getExerciseLookup', requestOptions).pipe(
+    return this.http.get(ENV.URLIntegration+'getExerciseLookup', requestOptions).pipe(
       catchError(error => {
         let errorMsg: string = '';
         if (error.error instanceof ErrorEvent) {
@@ -144,7 +140,7 @@ export class IntegrationService {
       headers: new HttpHeaders(headerDict),
     };
 
-    return this.http.post(this.URLIntegration+'addNewPlayer/' + userId ,player ,requestOptions).pipe(
+    return this.http.post(ENV.URLIntegration+'addNewPlayer/' + userId ,player ,requestOptions).pipe(
       catchError(error => {
         let errorMsg: string = '';
         if (error.error instanceof ErrorEvent) {
@@ -166,7 +162,7 @@ export class IntegrationService {
     const requestOptions = {
       headers: new HttpHeaders(headerDict),
     };
-    return this.http.get(this.URLIntegration+'getPlayerByCodeOrPlayerName/'+codeOrPlayerName, requestOptions).pipe(
+    return this.http.get(ENV.URLIntegration+'getPlayerByCodeOrPlayerName/'+codeOrPlayerName, requestOptions).pipe(
       catchError(error => {
         let errorMsg: string = '';
         if (error.error instanceof ErrorEvent) {
@@ -188,7 +184,7 @@ export class IntegrationService {
     const requestOptions = {
       headers: new HttpHeaders(headerDict),
     };
-    return this.http.get<Player>(this.URLIntegration+'getPlayerByCode/'+code, requestOptions);
+    return this.http.get<Player>(ENV.URLIntegration+'getPlayerByCode/'+code, requestOptions);
   }
 
   // change-player-subscriptions-strategy/{subtypeId}/{codeId}
@@ -201,7 +197,7 @@ export class IntegrationService {
       headers: new HttpHeaders(headerDict),
     };
     return this.http.get<Player>
-    (this.URLIntegration+'changePlayerSubscriptionsStrategy/'
+    (ENV.URLIntegration+'changePlayerSubscriptionsStrategy/'
     +subtypeId+'/'+code, requestOptions);
   }
 
@@ -218,7 +214,7 @@ export class IntegrationService {
     let formData = new FormData();
     formData.append('code' , code);
     formData.append('file' , image);
-    return this.http.post(this.URLIntegration+'updatePlayerImage' , formData, requestOptions).pipe(
+    return this.http.post(ENV.URLIntegration+'updatePlayerImage' , formData, requestOptions).pipe(
       catchError(error => {
         let errorMsg: string = '';
         if (error.error instanceof ErrorEvent) {
@@ -241,7 +237,7 @@ export class IntegrationService {
       headers: new HttpHeaders(headerDict),
     };
 
-    return this.http.put(this.URLIntegration+'updatePlayer/'+ code ,player ,requestOptions).pipe(
+    return this.http.put(ENV.URLIntegration+'updatePlayer/'+ code ,player ,requestOptions).pipe(
       catchError(error => {
         let errorMsg: string = '';
         if (error.error instanceof ErrorEvent) {
@@ -263,7 +259,7 @@ export class IntegrationService {
     const requestOptions = {
       headers: new HttpHeaders(headerDict),
     };
-    return this.http.post(this.URLIntegration+'registerUserAdmin', user, requestOptions).pipe(
+    return this.http.post(ENV.URLIntegration+'registerUserAdmin', user, requestOptions).pipe(
       catchError(error => {
         let errorMsg: string = '';
         if (error.error instanceof ErrorEvent) {
@@ -286,7 +282,7 @@ export class IntegrationService {
       headers: new HttpHeaders(headerDict),
     };
 
-    return this.http.get(this.URLIntegration+'date' ,requestOptions).pipe(
+    return this.http.get(ENV.URLIntegration+'date' ,requestOptions).pipe(
       catchError(error => {
         let errorMsg: string = '';
         if (error.error instanceof ErrorEvent) {
@@ -308,7 +304,7 @@ export class IntegrationService {
     const requestOptions = {
       headers: new HttpHeaders(headerDict),
     };
-    return this.http.put(this.URLIntegration+'renewPlayerSubscription/'+ code ,subscription ,requestOptions).pipe(
+    return this.http.put(ENV.URLIntegration+'renewPlayerSubscription/'+ code ,subscription ,requestOptions).pipe(
       catchError(error => {
         let errorMsg: string = '';
         if (error.error instanceof ErrorEvent) {
@@ -330,7 +326,7 @@ export class IntegrationService {
     const requestOptions = {
       headers: new HttpHeaders(headerDict),
     };
-    return this.http.put(this.URLIntegration+'updatePlayerHulfMonthNOByCode/'+ code ,hulfMonthNO ,requestOptions).pipe(
+    return this.http.put(ENV.URLIntegration+'updatePlayerHulfMonthNOByCode/'+ code ,hulfMonthNO ,requestOptions).pipe(
       catchError(error => {
         let errorMsg: string = '';
         if (error.error instanceof ErrorEvent) {
@@ -353,7 +349,7 @@ export class IntegrationService {
       headers: new HttpHeaders(headerDict),
     };
 
-    return this.http.post(this.URLIntegration+'checkPasswordValidation/'+userId , password, requestOptions).pipe(
+    return this.http.post(ENV.URLIntegration+'checkPasswordValidation/'+userId , password, requestOptions).pipe(
       catchError(error => {
         let errorMsg: string = '';
         if (error.error instanceof ErrorEvent) {
@@ -376,7 +372,7 @@ export class IntegrationService {
       headers: new HttpHeaders(headerDict),
     };
 
-    return this.http.post<Player[]>(`${this.URLIntegration}getplayerListOfInSubscriptionOrOut/1`, null, requestOptions);
+    return this.http.post<Player[]>(`${ENV.URLIntegration}getplayerListOfInSubscriptionOrOut/1`, null, requestOptions);
   }
 
   // check Password Validation ...
@@ -389,7 +385,7 @@ export class IntegrationService {
       headers: new HttpHeaders(headerDict),
     };
 
-    return this.http.post<Player[]>(`${this.URLIntegration}getplayerListOfInSubscriptionOrOut/2`, null, requestOptions);
+    return this.http.post<Player[]>(`${ENV.URLIntegration}getplayerListOfInSubscriptionOrOut/2`, null, requestOptions);
   }
 
   // update Player amount rest By Code ...
@@ -401,7 +397,7 @@ export class IntegrationService {
     const requestOptions = {
       headers: new HttpHeaders(headerDict),
     };
-    return this.http.post(`${this.URLIntegration}updatePlayerAmountRestByCode/${code}` ,null ,requestOptions).pipe(
+    return this.http.post(`${ENV.URLIntegration}updatePlayerAmountRestByCode/${code}` ,null ,requestOptions).pipe(
       catchError(error => {
         let errorMsg: string = '';
         if (error.error instanceof ErrorEvent) {

@@ -23,7 +23,7 @@ import { SidebarComponent } from './layouts/full/sidebar/sidebar.component';
 import { HeaderComponent } from './layouts/full/header/header.component';
 import { BrandingComponent } from './layouts/full/sidebar/branding.component';
 import { AppNavItemComponent } from './layouts/full/sidebar/nav-item/nav-item.component';
-import { registerLocaleData } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import {MatTableModule} from '@angular/material/table';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
@@ -63,7 +63,10 @@ registerLocaleData(en);
   exports: [TablerIconsModule,],
   bootstrap: [AppComponent],
   providers: [
-    
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    }
   ],
 })
 export class AppModule {}

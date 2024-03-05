@@ -11,7 +11,7 @@
 	<groupId>com.ahmedeid.securityandjwt</groupId>
 	<artifactId>GYM</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+<!--	<packaging>war</packaging>-->
 	<name>GYM</name>
 	<description>testing jjwt in java to use it in bank de cairo</description>
 

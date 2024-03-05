@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ENV } from 'src/app/services/services/security/store-storage';
 
 @Component({
   selector: 'app-branding',
@@ -6,7 +7,7 @@ import { Component } from '@angular/core';
     <div class="branding">
       <a href="/">
         <img
-          src="./assets/images/logos/logo.png"
+          src="{{PRO_LOGO_IMAGE}}"
           width="200px"
           class="align-middle m-2"
           alt="logo"
@@ -17,4 +18,5 @@ import { Component } from '@angular/core';
 })
 export class BrandingComponent {
   constructor() {}
+  PRO_LOGO_IMAGE = ENV.PRO_LOGO_IMAGE;
 }
